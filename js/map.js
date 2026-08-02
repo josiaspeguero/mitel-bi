@@ -1,6 +1,6 @@
 import { calculateBearing } from './utils.js';
 
-const DEFAULT_CENTER = [18.4861, -69.7856];
+const DEFAULT_CENTER = [18.493223, -69.750708];
 const DEFAULT_ZOOM = 14;
 
 let map = null;
@@ -16,7 +16,7 @@ export function initMap(containerId) {
     zoom: DEFAULT_ZOOM,
     zoomControl: true,
     attributionControl: true,
-  });
+  }); 
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution:
