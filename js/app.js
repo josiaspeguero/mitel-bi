@@ -1,7 +1,7 @@
 import { connect, getStatus, onTelemetry } from './mqtt.js';
 import { initMap, drawRoute, drawStopMarkers, updateBusMarker, updateStopMarkers, invalidateSize } from './map.js';
 import { getState, updateTelemetry, setRouteName } from './vehicle.js';
-import { getStops, detectStop, getRoutePath, ROUTE_NAME } from './route.js';
+import { getStops, detectStop, getRoutePath, ROUTE_NAME, labelStopsWithPlaceNames } from './route.js';
 import { initUI, renderAll, showToast } from './ui.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -18,6 +18,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const stops = getStops();
   drawStopMarkers(stops);
+
+  labelStopsWithPlaceNames().then((changed) => {
+    if (changed > 0) {
+      drawStopMarkers(getStops());
+      const state = getState();
+      renderAll(state, { currentStop: getCurrentStop(), nextStop: getNextStop() }, getStatus());
+    }
+  });
 
   onTelemetry((telemetry) => {
     handleTelemetry(telemetry);

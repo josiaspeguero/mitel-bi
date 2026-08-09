@@ -1,6 +1,6 @@
 import { calculateBearing } from './utils.js';
 
-const DEFAULT_CENTER = [18.493223, -69.750708];
+const DEFAULT_CENTER = [18.493059, -69.750604];
 const DEFAULT_ZOOM = 14;
 
 let map = null;
